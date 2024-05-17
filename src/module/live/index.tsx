@@ -20,9 +20,19 @@ import HarizontalCards from './HarizontalCards';
 import {card} from './card';
 import SearchScreen from './DropDown/SeachScreen';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../navigation/types';
+import RNShake from 'react-native-shake';
 
-const Live = () => {
-  const navigation = useNavigation();
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'BottomTab'
+>;
+type RenderConfigureDataProps = {
+  navigation: HomeScreenNavigationProp;
+};
+
+const Live: React.FC<RenderConfigureDataProps> = ({navigation}: any) => {
   const [selectedData, setSelectedData] = useState('Chennai');
   const [iconData, setIconData] = useState();
   const [dataShow, setDataShow] = useState(false);
@@ -34,6 +44,8 @@ const Live = () => {
 
   const handlerScroll = (e: any) => {
     const currentOffsetY = e.nativeEvent.contentOffset.y;
+    console.log(currentOffsetY, '416================>');
+
     if (currentOffsetY > prevScrollOffsetY.current) {
       setDataShow(true);
     } else {
@@ -72,6 +84,18 @@ const Live = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  ///shake device code
+  useEffect(() => {
+    const subscription = RNShake.addListener(() => {
+      navigation.navigate('DiningTab');
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+
   return (
     <LinearGradient
       start={{x: 0, y: 0}}
@@ -83,13 +107,7 @@ const Live = () => {
         '#1c0915',
         '#000',
       ]}
-      style={
-        styles.linearGradient
-        // {
-        //   backgroundColor: isFocused ? '#000' : '#fff',
-        //   zIndex: isFocused ? 1 : 0,
-        // }
-      }>
+      style={styles.linearGradient}>
       <SafeAreaView style={styles.containerLive}>
         {dataShow === false ? (
           <HeaderLive
@@ -107,9 +125,17 @@ const Live = () => {
             setIsFocused={setIsFocused}
           />
         ) : (
-          <View style={styles.dropContainer}>
-            <View style={styles.inputContainer}>
-              <SearchScreen isFocused={isFocused} setIsFocused={setIsFocused} />
+          <View style={{paddingBottom: 5}}>
+            <View style={styles.dropContainer}>
+              <View style={styles.inputContainer}>
+                <SearchScreen
+                  isFocused={isFocused}
+                  setIsFocused={setIsFocused}
+                />
+              </View>
+            </View>
+            <View>
+              <HarizontalCards />
             </View>
           </View>
         )}
@@ -126,10 +152,11 @@ const Live = () => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }>
           {refreshing ? <CardsData /> : <CardsData />}
-          {/* {dataShow === false ? ( */}
-          <View>
-            <HarizontalCards />
-          </View>
+          {dataShow === false && (
+            <View>
+              <HarizontalCards />
+            </View>
+          )}
           {/* ) : (
             <></>
           )} */}
@@ -212,14 +239,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     padding: 10,
     borderWidth: 3,
-    borderTopWidth: 3,
-    borderBottomWidth: 3,
-    borderLeftWidth: 3,
-    borderRightWidth: 3,
-    borderTopColor: '#333333',
-    borderBottomColor: '#333333',
-    borderLeftColor: '#333333',
-    borderRightColor: '#333333',
+    borderColor: '#333333',
   },
   titleViewContainer: {
     position: 'absolute',

@@ -20,6 +20,7 @@ const HorizontalCards = () => {
   const [buttonChange, setButtonChange] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [dataa, setDataa] = useState('Sort');
+  const [sortData, setSortData] = useState(false);
   const [diffrentData, setDiffrentData] = useState(false);
   const [djData, setDjData] = useState(false);
   const [liveData, setLiveData] = useState(false);
@@ -32,24 +33,33 @@ const HorizontalCards = () => {
   const handleApply = () => {
     if (dataa !== 'Sort') {
       setModalVisible(false);
+      setSortData(true);
     }
   };
   const handleOpenModel = () => {
     setSelectedId(null);
     // setDataa('Sort');
     setModalVisible(true);
+    // setDiffrentData(true);
   };
   const handleCloseModal = () => {
     setSelectedId(null);
     // setDataa('Sort');
     setModalVisible(false);
+    // setSortData(false)
   };
   return (
     <ScrollView horizontal={true} style={styles.hrContainer}>
       <View style={styles.hrSubContainer}>
         <TouchableOpacity
           onPress={handleOpenModel}
-          style={styles.cardHrOneView}>
+          style={[
+            styles.cardHrOneView,
+            {
+              backgroundColor: sortData === true ? '#6c2222' : '#333333',
+              borderColor: sortData === true ? '#b70000' : '#474747',
+            },
+          ]}>
           <Image
             style={{height: 10, width: 10}}
             source={{
@@ -57,12 +67,23 @@ const HorizontalCards = () => {
             }}
           />
           <Text style={styles.cardHrText}>{dataa}</Text>
-          <Image
-            style={{height: 10, width: 10}}
-            source={{
-              uri: 'https://cdn-icons-png.flaticon.com/128/8213/8213476.png',
-            }}
-          />
+
+          {sortData === true ? (
+            <Image
+              height={16}
+              width={16}
+              source={{
+                uri: 'https://cdn-icons-png.flaticon.com/128/11741/11741047.png',
+              }}
+            />
+          ) : (
+            <Image
+              style={{height: 10, width: 10}}
+              source={{
+                uri: 'https://cdn-icons-png.flaticon.com/128/8213/8213476.png',
+              }}
+            />
+          )}
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setDiffrentData(!diffrentData)}
@@ -172,15 +193,7 @@ const HorizontalCards = () => {
                             <View style={styles.smallCircleView}></View>
                           )}
                         </View>
-                        {/* <Image
-                          source={{
-                            uri: isSelected
-                              ? 'https://cdn-icons-png.flaticon.com/128/7080/7080757.png'
-                              : 'https://cdn-icons-png.flaticon.com/128/491/491717.png',
-                          }}
-                          height={16}
-                          width={16}
-                        /> */}
+
                         <Text style={styles.modalTitle}>{item.title}</Text>
                       </TouchableOpacity>
                     </View>
@@ -193,6 +206,8 @@ const HorizontalCards = () => {
                     setButtonChange(true);
                     setSelectedId(null);
                     setModalVisible(false);
+                    setSortData(false);
+                    setDataa('Sort');
                   }}
                   style={
                     // buttonChange === false ? styles.clearAll :
@@ -230,9 +245,6 @@ const HorizontalCards = () => {
             </View>
           </View>
         </Modal>
-        <Pressable onPress={() => setModalVisible(true)}>
-          <Text>Show Modal</Text>
-        </Pressable>
       </View>
     </ScrollView>
   );
