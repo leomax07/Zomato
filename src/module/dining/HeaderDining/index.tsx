@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Text, View, StyleSheet, Animated, ImageBackground} from 'react-native';
-import HeaderBackgroundImage from '../headerBackgroundImage';
+import HeaderBackgroundImage from '../../../components/headerBackgroundImage';
+// import HeaderBackgroundImage from '../headerBackgroundImage';
 
 const Header_Max_Height = 300;
 const Header_Min_Height = 70;
@@ -9,7 +10,7 @@ interface DynamicHeaderProps {
   animHeaderValue: Animated.Value;
 }
 
-const DynamicHeader: React.FC<DynamicHeaderProps> = ({animHeaderValue}) => {
+const HeaderLive: React.FC<DynamicHeaderProps> = ({animHeaderValue}) => {
   const animateHeaderBackgroundColor = animHeaderValue.interpolate({
     inputRange: [0, Header_Max_Height - Header_Min_Height],
     outputRange: ['white', 'white'],
@@ -46,7 +47,7 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({animHeaderValue}) => {
   );
 };
 
-export default DynamicHeader;
+export default HeaderLive;
 
 const styles = StyleSheet.create({
   header: {
