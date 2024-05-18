@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import LineText from '../../../components/lineText'
-import Recommended from './Recommended';
+// import Recommended from './Recommended';
 import Favourites from './favourites';
 
 const ForYou = () => {
@@ -14,7 +14,8 @@ const ForYou = () => {
     const HandleComponentRender = () => {
         if (activeTab === "recommended") {
             return (
-                <Recommended />
+                // <Recommended />
+                <View><Text>qwerty</Text></View>
             )
         }
         else {

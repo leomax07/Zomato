@@ -1,6 +1,6 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {RootTabParamList} from './types';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RootTabParamList } from './types';
 import Delivery from '../module/delivery';
 import Dining from '../module/dining';
 import Live from '../module/live';
@@ -8,12 +8,12 @@ import { Image, StyleSheet } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 
 const BottomTab = () => {
-  const Tab = createBottomTabNavigator<RootTabParamList>();
+    const Tab = createBottomTabNavigator<RootTabParamList>();
 
     return (
         <Tab.Navigator
             initialRouteName="DeliveryTab"
-            screenOptions={({ route }: { route: RouteProp<RootTabParamList, keyof RootTabParamList> }) => 
+            screenOptions={({ route }: { route: RouteProp<RootTabParamList, keyof RootTabParamList> }): any =>
             ({
                 tabBarActiveTintColor: '#000',
                 headerShown: false,
@@ -32,7 +32,7 @@ const BottomTab = () => {
                     height: 30,
                 },
             })}
-          
+
         >
             <Tab.Screen name="DeliveryTab" component={Delivery}
                 options={{
@@ -84,8 +84,8 @@ const BottomTab = () => {
 export default BottomTab
 
 const styles = StyleSheet.create({
-    image:{
-        height:30,
-        width:30
+    image: {
+        height: 30,
+        width: 30
     }
 })
