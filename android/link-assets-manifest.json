@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/OFL.txt",
+      "sha1": "54a0e2e89caf8860ccd152c9807047e97f4999be"
+    },
+    {
+      "path": "src/assets/fonts/PoetsenOne-Regular.ttf",
+      "sha1": "90edb2edd900ad302faeab3b1f0f0b5548649dda"
+    }
+  ]
+}

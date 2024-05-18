@@ -6,5 +6,5 @@ export type RootTabParamList = {
 
 export type RootStackParamList = {
     BottomTab: undefined;
-    TodayScreen:undefined
+    ProfileScreen: undefined;
 }

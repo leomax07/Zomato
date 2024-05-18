@@ -1,14 +1,15 @@
 import { Animated, ImageBackground, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 const Header_Max_Height = 300;
 const Header_Min_Height = 70;
 
 interface DynamicHeaderProps {
     animHeaderValue: Animated.Value;
+    children: ReactNode;
 }
 
-const HeaderBackgroundImage: React.FC<DynamicHeaderProps> = ({ animHeaderValue }) => {
+const HeaderBackgroundImage: React.FC<DynamicHeaderProps> = ({ animHeaderValue, children }) => {
 
     const [timeOfDayImage, setTimeOfDayImage] = useState<string>('');
 
@@ -41,7 +42,9 @@ const HeaderBackgroundImage: React.FC<DynamicHeaderProps> = ({ animHeaderValue }
             <ImageBackground
                 source={{ uri: timeOfDayImage }}
                 style={styles.backgroundImage}
-            />
+            >
+                {children}
+            </ImageBackground>
         </Animated.View>
     )
 }
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
     },
 

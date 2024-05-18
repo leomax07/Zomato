@@ -1,8 +1,11 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, Animated, ImageBackground} from 'react-native';
-import HeaderBackgroundImage from '../headerBackgroundImage';
+import { StyleSheet, Animated } from 'react-native';
+import HeaderTop from '../headerTop';
+import HeaderImage from '../headerImage';
+import HeaderSearch from '../headerSearch';
+// import HeaderBackgroundImage from '../headerBackgroundImage';
 
-const Header_Max_Height = 300;
+const Header_Max_Height = 320;
 const Header_Min_Height = 70;
 
 interface DynamicHeaderProps {
@@ -28,37 +31,37 @@ const DynamicHeader: React.FC<DynamicHeaderProps> = ({animHeaderValue}) => {
     extrapolate: 'clamp',
   });
 
-  return (
-    <Animated.View
-      style={[
-        styles.header,
-        {
-          height: animateHeaderHeight,
-          backgroundColor: animateHeaderBackgroundColor,
-          borderBottomLeftRadius: borderBottomRadius,
-          borderBottomRightRadius: borderBottomRadius,
-          overflow: 'hidden',
-        },
-      ]}>
-      <HeaderBackgroundImage animHeaderValue={animHeaderValue} />
-      <Text style={styles.headerText}>A List of Books</Text>
-    </Animated.View>
-  );
-};
+    return (
+        <Animated.View
+            style={[
+                styles.header,
+                {
+                    height: animateHeaderHeight,
+                    backgroundColor: animateHeaderBackgroundColor,
+                    borderBottomLeftRadius: borderBottomRadius,
+                    borderBottomRightRadius: borderBottomRadius,
+                    overflow: 'hidden'
+                }
+
+            ]}
+        >
+            <HeaderTop animHeaderValue={animHeaderValue} />
+            <HeaderSearch animHeaderValue={animHeaderValue} />
+            <HeaderImage animHeaderValue={animHeaderValue} />
+            {/* <HeaderBackgroundImage animHeaderValue={animHeaderValue}>
+            <HeaderTop animHeaderValue={animHeaderValue}/>
+            <HeaderSearch animHeaderValue={animHeaderValue}/>
+            </HeaderBackgroundImage> */}
+        </Animated.View>
+    );
+}
 
 export default DynamicHeader;
 
 const styles = StyleSheet.create({
-  header: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    left: 0,
-    right: 0,
-  },
-  headerText: {
-    color: '#fff',
-    fontSize: 25,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
+    header: {
+        alignItems: 'center',
+        left: 0,
+        right: 0,
+    },
 });
